@@ -1,0 +1,183 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django/Flask/etc.
+*.log
+local_settings.py
+db.sqlite3
+instance/
+.webassets-cache
+
+# Scrapy/Sphinx/etc.
+.scrapy
+docs/_build/
+target/
+
+# Jupyter
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+
+# SageMath
+*.sage.py
+
+# dotenv
+.env
+
+# Virtualenv
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+Enigma/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Sensitive files (your API keys!)
+src/config.py
+*.key
+*.pem
+*.crt
+*.cer
+secrets.json
+
+# Project-specific excludes
+logs/
+__pycache__/
+.pycache/ 
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment (your case)
+Enigma/
+
+# Environment files
+.env
+*.env
+
+# Logs and local data
+*.log
+*.sqlite3
+
+# Build directories
+build/
+dist/
+*.egg-info/
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+Enigma/
+
+# Environment files
+.env
+*.env
+
+# Logs and local data
+*.log
+*.sqlite3
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore HTML files
+*.html
+
+# Ignore your virtual environment
+Enigma/
+
+# Common ignores
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Env files
+.env
+*.env
+
+# Logs
+*.log
+
+# Build dirs
+build/
+dist/
+*.egg-info/
+
+# Ignore HTML files
+*.html
