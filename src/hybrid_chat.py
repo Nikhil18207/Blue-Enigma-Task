@@ -498,18 +498,18 @@ async def interactive_chat():
 ║ Type 'exit', 'quit', or Ctrl+C to end                ║
 ╚══════════════════════════════════════════════════════╝
     """)
-    user_name = input("🌟 Hello, traveler! What's your name? ").strip()
+    user_name = input(" Hello, traveler! What's your name? ").strip()
     if not user_name:
         user_name = "Traveler"
-    print(f"\nHi {user_name}, I'm Odyssey, your friendly guide to Vietnam! 💡 Try: 'Create a romantic 4-day itinerary for Vietnam' or 'Best food in Hanoi'\n")
+    print(f"\nHi {user_name}, I'm Odyssey, your friendly guide to Vietnam!  Try: 'Create a romantic 4-day itinerary for Vietnam' or 'Best food in Hanoi'\n")
     while True:
         try:
             query = input(f"\n🌍 {user_name}, what's your travel question? ").strip()
             if not query or query.lower() in ('exit', 'quit', 'bye'):
-                print(f"\n👋 Safe travels, {user_name}! Thanks for exploring with Odyssey.")
+                print(f"\n Safe travels, {user_name}! Thanks for exploring with Odyssey.")
                 break
             if len(query) < 3:
-                print(f"❌ {user_name}, please enter a valid travel question.")
+                print(f" {user_name}, please enter a valid travel question.")
                 continue
             print(f"\n🔄 Hi {user_name}, processing your request... (10-30 seconds)")
             print("📡 Running semantic search + graph analysis + AI planning...")
@@ -517,22 +517,22 @@ async def interactive_chat():
             result = await process_travel_query(query, user_name)
             duration = time.time() - start_time
             print(f"\n{'='*70}")
-            print(f"🎯 YOUR PERSONALIZED TRAVEL PLAN, {user_name.upper()}!")
+            print(f" YOUR PERSONALIZED TRAVEL PLAN, {user_name.upper()}!")
             print(f"{'='*70}")
-            print(f"⏱️ Response time: {duration:.1f}s")
-            print(f"📊 Retrieved: {result['metrics']['final_matches']} key locations")
-            print(f"🎯 Intent: {result['context'].intent}")
-            print("\n🔍 Search Summary:")
+            print(f" Response time: {duration:.1f}s")
+            print(f" Retrieved: {result['metrics']['final_matches']} key locations")
+            print(f" Intent: {result['context'].intent}")
+            print("\n Search Summary:")
             print(result['summary'])
-            print("\n📋 Your Itinerary:")
+            print("\n Your Itinerary:")
             print(result['itinerary'])
             print(f"\n{'='*70}")
         except KeyboardInterrupt:
-            print(f"\n\n👋 Session interrupted, {user_name}. Safe travels!")
+            print(f"\n\n Session interrupted, {user_name}. Safe travels!")
             break
         except Exception as e:
             logger.error(f"Chat processing error for {user_name}: {e}", exc_info=True)
-            print(f"❌ Hi {user_name}, an error occurred: {str(e)}")
+            print(f" Hi {user_name}, an error occurred: {str(e)}")
             print("Please try again.")
 
 def close_connections():
