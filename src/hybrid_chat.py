@@ -18,7 +18,6 @@ import io
 import os
 from logging.handlers import RotatingFileHandler
 
-# Windows console encoding fix
 if sys.platform == "win32":
     try:
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -26,7 +25,6 @@ if sys.platform == "win32":
     except:
         pass
 
-# Setup logging
 LOG_DIR = getattr(config, 'LOG_DIR', 'logs')
 LOG_FILE = os.path.join(LOG_DIR, 'hybrid_chat.log')
 MAX_LOG_SIZE = 5 * 1024 * 1024
@@ -56,7 +54,6 @@ logger.handlers.clear()
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-# In-memory cache
 cache_store = defaultdict(dict)
 CACHE_TTL = 3600
 
@@ -88,7 +85,7 @@ class RetrievalMode(Enum):
     SEMANTIC_ONLY = "semantic"
     GRAPH_ONLY = "graph"
 
-# Configuration
+
 EMBED_MODEL = getattr(config, 'EMBED_MODEL', 'text-embedding-3-small')
 CHAT_MODEL = getattr(config, 'GPT_MODEL', 'gpt-4o-mini')
 TOP_K = 8
@@ -96,7 +93,7 @@ INDEX_NAME = getattr(config, 'PINECONE_INDEX', 'vietnam-travel')
 NAMESPACE = getattr(config, 'PINECONE_NAMESPACE', 'vietnam')
 VECTOR_DIM = getattr(config, 'PINECONE_VECTOR_DIM', 1536)
 
-# Initialize clients
+
 try:
     openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
     logger.info("OpenAI client initialized")
