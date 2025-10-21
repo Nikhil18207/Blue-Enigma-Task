@@ -15,21 +15,20 @@ from logging.handlers import RotatingFileHandler
 # Setup logging
 LOG_DIR = getattr(config, 'LOG_DIR', 'logs')
 LOG_FILE = os.path.join(LOG_DIR, 'pinecone_upload.log')
-MAX_LOG_SIZE = 5 * 1024 * 1024  # 5MB
-BACKUP_COUNT = 5  # Keep 5 backup log files
+MAX_LOG_SIZE = 5 * 1024 * 1024  
+BACKUP_COUNT = 5  
 
-# Create log directory if it doesn't exist
 os.makedirs(LOG_DIR, exist_ok=True)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-# Create formatter
+
 formatter = logging.Formatter(
     '%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s'
 )
 
-# File handler with rotation
+
 file_handler = RotatingFileHandler(
     LOG_FILE,
     maxBytes=MAX_LOG_SIZE,
@@ -38,11 +37,11 @@ file_handler = RotatingFileHandler(
 )
 file_handler.setFormatter(formatter)
 
-# Stream handler for console output
+
 stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)
 
-# Clear any existing handlers to avoid duplicates
+
 logger.handlers.clear()
 
 # Add handlers
@@ -58,7 +57,7 @@ VECTOR_DIM = config.PINECONE_VECTOR_DIM
 NAMESPACE = getattr(config, 'PINECONE_NAMESPACE', 'vietnam')
 EMBED_MODEL = getattr(config, 'EMBED_MODEL', 'text-embedding-3-small')
 
-# Initialize clients
+
 try:
     openai_client = AsyncOpenAI(api_key=config.OPENAI_API_KEY)
     logger.info("OpenAI client initialized")
@@ -73,7 +72,6 @@ except Exception as e:
     logger.error(f"Pinecone initialization failed: {e}", exc_info=True)
     pc = None
 
-# Pinecone Index Setup
 def ensure_index_ready():
     if not pc:
         raise Exception("Pinecone client not initialized")
@@ -105,7 +103,7 @@ except Exception as e:
     logger.error(f"Failed to initialize Pinecone index: {e}", exc_info=True)
     index = None
 
-# Enhanced Embedding Functions
+
 @retry(
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=1, min=2, max=10),
@@ -167,7 +165,7 @@ async def upload_in_parallel(batches: List[List[Tuple[str, str, Dict]]], session
     logger.info(f"Completed parallel upload: {total_uploaded} vectors")
     return total_uploaded
 
-# Data Processing
+
 def load_and_prepare_data() -> List[Tuple[str, str, Dict]]:
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as f:
@@ -201,7 +199,7 @@ def chunk_data(items: List[Tuple[str, str, Dict]], batch_size: int) -> List[List
     batch_size = min(batch_size, len(items))
     return [items[i:i + batch_size] for i in range(0, len(items), batch_size)]
 
-# Main Pipeline
+
 async def main():
     start_time = time.time()
     async with aiohttp.ClientSession() as session:
@@ -224,7 +222,7 @@ async def main():
         logger.info(f"   2. Pinecone dashboard showing record count in '{NAMESPACE}' namespace")
         logger.info(f"   3. Verify with: python hybrid_chat.py")
 
-# Cleanup
+
 def cleanup():
     logger.info("Cleaning up resources")
     cache_store = globals().get('cache_store', None)
@@ -232,7 +230,6 @@ def cleanup():
         cache_store.clear()
         logger.info("Cache cleared")
 
-# Entry Point
 if __name__ == "__main__":
     try:
         asyncio.run(main())
